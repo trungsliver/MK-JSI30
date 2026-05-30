@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "name": "Sofa góc cao cấp",
+        "price": 1250,
+        "image": "https://erado.vn/img/i/sofa-goc-thong-minh-mo-rong-cho-ngoi-nv21-25315.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Bàn ăn gỗ tự nhiên",
+        "price": 850,
+        "image": "https://erado.vn/img/i/sofa-goc-thong-minh-mo-rong-cho-ngoi-nv21-25315.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Tủ quần áo 4 cánh",
+        "price": 1600,
+        "image": "https://erado.vn/img/i/sofa-goc-thong-minh-mo-rong-cho-ngoi-nv21-25315.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Bàn trà mặt kính",
+        "price": 420,
+        "image": "https://erado.vn/img/i/sofa-goc-thong-minh-mo-rong-cho-ngoi-nv21-25315.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Kệ TV hiện đại",
+        "price": 690,
+        "image": "https://erado.vn/img/i/sofa-goc-thong-minh-mo-rong-cho-ngoi-nv21-25315.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Sofa đôi bọc da",
+        "price": 980,
+        "image": "https://erado.vn/img/i/sofa-goc-thong-minh-mo-rong-cho-ngoi-nv21-25315.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Ghế thư giãn cao cấp",
+        "price": 560,
+        "image": "https://erado.vn/img/i/sofa-goc-thong-minh-mo-rong-cho-ngoi-nv21-25315.jpg"
+    },
+    {
+        "id": 8,
+        "name": "Bàn làm việc gỗ sồi",
+        "price": 720,
+        "image": "https://erado.vn/img/i/sofa-goc-thong-minh-mo-rong-cho-ngoi-nv21-25315.jpg"
+    }
+]
