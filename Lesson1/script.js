@@ -51,3 +51,27 @@ fetch('./data.json')
             container.appendChild(productCard);
         })
     })
+
+    // Bài 3: Fetch API - Lấy dữ liệu từ API công khai
+fetch('https://jsonplaceholder.typicode.com/posts')
+    // Chuyển dổi dữ liệu lấy về (response) thành JSON
+    .then(response => response.json())
+    // Xử lý dữ liệu JSON đã chuyển đổi
+    .then(data => {
+        // Dùng DOM lấy container
+        const container = document.getElementById('postList');
+        // Duyệt dữ liệu lấy về từ API
+        for (let i = 0; i < 20; i++) {
+            const post = data[i];
+            // Tạo thẻ div có class = "post-card" cho mỗi bài viết
+            const postCard = document.createElement('div');
+            postCard.classList.add('post-card');
+            // Gán thông tin bài viết
+            postCard.innerHTML = `
+                <h3>${post.title}</h3>
+                <p>${post.body}</p>
+            `
+            // Thêm thẻ div vào container
+            container.appendChild(postCard);
+        }
+    })
