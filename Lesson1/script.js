@@ -26,3 +26,28 @@ function displayStudents() {
 }
     // Gọi hàm hiển thị
 displayStudents();
+
+// Bài 2: Hiển thị dữ liệu từ file JSON
+    // Lấy dữ liệu từ file data.json bằng fetch API
+fetch('./data.json')
+    // Chuyển dổi dữ liệu lấy về (response) thành JSON
+    .then(response => response.json())
+    // Xử lý dữ liệu JSON đã chuyển đổi
+    .then(data => {
+        // Dùng DOM lấy container
+        const container = document.getElementById('productList');
+        // Duyệt dữ liệu trong file data.json
+        data.forEach(product => {
+            // Tạo thẻ div có class = "product-card" cho mỗi sp
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+            // Gán thông tin sản phẩm
+            productCard.innerHTML = `
+                <img src="${product.image}" alt="">
+                <h3>${product.name}</h3>
+                <p>Price: $${product.price}</p>
+            `
+            // Thêm thẻ div vào container
+            container.appendChild(productCard);
+        })
+    })

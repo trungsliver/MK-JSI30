@@ -1,0 +1,59 @@
+.grid-container {
+  display: grid;
+  /* tự giãn số cột tùy theo chiều rộng */
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  justify-items: center; /* canh card vào giữa */
+}
+
+/* CARD CỐ ĐỊNH KÍCH THƯỚC */
+.product-card {
+  width: 240px;     /* cố định chiều rộng */
+  height: 340px;    /* cố định chiều cao */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px;
+  background: #fff;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Ảnh cố định và không bị méo */
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Tiêu đề */
+.product-card h3 {
+  margin: 10px 0 6px;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.product-card p {
+  font-size: 16px;
+  color: #555;
+  flex-shrink: 0;
+}
+
+.post-card {
+  width: 240px;     /* cố định chiều rộng */
+  height: 340px;    /* cố định chiều cao */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px;
+  background: #fff;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
