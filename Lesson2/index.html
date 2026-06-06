@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <!-- ============== LOCAL STORAGE =============== -->
+     <h2>Local Storage</h2>
+     <p>Ý nghĩa: Cho phép lưu dữ liệu trên trình duyệt</p>
+     <ul>Lưu ý:
+        <li>Dữ liệu lưu dạng key - value</li>
+        <li>Chỉ lưu được string</li>
+        <li>Nếu muốn lưu object/array => dùng JSON.stringify</li>
+     </ul>
+
+    <!-- Bài 1: Dark Mode / light mode -->
+    <h2>Dark Mode / Light Mode</h2>
+    <button id="themeBtn">Change theme</button>
+    <br><br>
+
+    <!-- Bài 2: Note List -->
+    <h2>Note List</h2>
+    <input type="text" id="noteInput" placeholder="Enter your note">
+    <button id="addNote">Add Note</button>
+        <!-- Container chứa ghi chú -->
+    <ul id="noteList"></ul>
+
+    <script src="./script.js"></script>
+</body>
+</html>
