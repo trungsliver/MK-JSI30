@@ -59,3 +59,53 @@ form.addEventListener("submit", async (e) => {
 		alert("Them ghi chu that bai.");
     }
 });
+
+
+// Nếu dữ liệu firestore thay đổi => update giao diện HTML
+onSnapshot(
+	notesQuery,
+	(snapshot) => {
+		notesList.innerHTML = "";
+
+        // Nếu không có ghi chú nào, hiển thị trạng thái rỗng
+		if (snapshot.empty) {
+			emptyState.style.display = "block";
+			return;
+		}
+
+		emptyState.style.display = "none";
+
+        // Duyệt qua từng document trong snapshot và tạo phần tử HTML tương ứng
+		snapshot.forEach((item) => {
+			const note = item.data();
+
+			const li = document.createElement("li");
+			li.className = "note-item";
+
+			const textSpan = document.createElement("span");
+			textSpan.textContent = note.text;
+
+			const deleteBtn = document.createElement("button");
+			deleteBtn.textContent = "Xóa";
+			deleteBtn.type = "button";
+
+            // Sự kiện khi ấn nút 'Xoa'
+			deleteBtn.addEventListener("click", async () => {
+				try {
+					await deleteDoc(doc(db, "notes_demo", item.id));
+				} catch (error) {
+					console.error("Khong the xoa ghi chu:", error);
+					alert("Xoa ghi chu that bai.");
+				}
+			});
+
+			li.append(textSpan, deleteBtn);
+			notesList.appendChild(li);
+		});
+	},
+	(error) => {
+		console.error("Khong the doc du lieu Firestore:", error);
+		emptyState.style.display = "block";
+		emptyState.textContent = "Khong doc duoc du lieu. Kiem tra Firestore Rules.";
+	}
+);
