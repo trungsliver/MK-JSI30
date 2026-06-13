@@ -9,6 +9,24 @@
 </head>
 
 <body>
+    <main class="container">
+        <h1>Firestore Demo</h1>
+        <p class="subtitle">Ví dụ: Thêm và hiển thị ghi chú real time.</p>
+
+        <form id="note-form" class="card">
+            <label for="note-input">Nội dung ghi chú</label>
+            <div class="row">
+                <input id="note-input" type="text" placeholder="Nhập một ghi chú..." required maxlength="120">
+                <button type="submit">Thêm</button>
+            </div>
+        </form>
+
+        <section class="card">
+            <h2>Danh sách ghi chú</h2>
+            <ul id="notes-list"></ul>
+            <p id="empty-state">Chưa có dữ liệu.</p>
+        </section>
+    </main>
 
     <!-- Link js -->
     <script type="module" src="./src/js/script.js"></script>
