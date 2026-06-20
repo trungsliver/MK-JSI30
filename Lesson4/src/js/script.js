@@ -6,6 +6,10 @@ import {
     getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signInWithRedirect,
+    getRedirectResult,
     signOut
 }
     from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
@@ -28,6 +32,8 @@ const app = initializeApp(firebaseConfig);
 // Khởi tạo các dịch vụ của Firebase (Auth và firestore)
 const auth = getAuth(app);
 const db = getFirestore(app);
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: "select_account" });
 
 // test app
 console.log(app.name); // "[DEFAULT]"
@@ -215,6 +221,81 @@ async function registerUser() {
 
 // =================== LOGIN =====================
 document.getElementById("login-btn").addEventListener("click", loginUser);
+document.getElementById("google-login-btn").addEventListener("click", loginWithGoogle);
+
+
+handleGoogleRedirectResult();
+
+
+async function handleGoogleRedirectResult() {
+    try {
+        const result = await getRedirectResult(auth);
+
+        if (!result) return;
+
+        await finishGoogleLogin(result.user);
+    }
+    catch (error) {
+        console.error("Google redirect login error:", error);
+    }
+}
+
+
+async function loginWithGoogle() {
+    const message = document.getElementById("login-message");
+    message.innerText = "";
+
+    try {
+        const userCredential = await signInWithPopup(auth, googleProvider);
+        await finishGoogleLogin(userCredential.user);
+    }
+    catch (error) {
+        console.error("Google popup login error:", error);
+
+        if (error.code === "auth/popup-blocked" || error.code === "auth/popup-closed-by-user") {
+            message.innerText = "Popup was blocked, switching to redirect login...";
+            await signInWithRedirect(auth, googleProvider);
+            return;
+        }
+
+        if (error.code === "auth/unauthorized-domain") {
+            message.innerText = "This domain is not authorized in Firebase Auth";
+            return;
+        }
+
+        message.innerText = `Google login failed: ${error.code || "unknown error"}`;
+    }
+}
+
+
+async function finishGoogleLogin(user) {
+    const userRef = doc(db, "users", user.uid);
+    const userDoc = await getDoc(userRef);
+
+    const currentUser = {
+        uid: user.uid,
+        username: userDoc.exists() ? userDoc.data().username : (user.displayName || "Google User"),
+        email: user.email,
+        phone: userDoc.exists() ? userDoc.data().phone : "",
+        dob: userDoc.exists() ? userDoc.data().dob : "",
+        photoURL: user.photoURL || "",
+        last_login: new Date().toLocaleString()
+    };
+
+    await setDoc(userRef, {
+        username: currentUser.username,
+        email: currentUser.email,
+        phone: currentUser.phone,
+        dob: currentUser.dob,
+        photoURL: currentUser.photoURL,
+        created_at: userDoc.exists() ? userDoc.data().created_at : new Date().toISOString()
+    }, { merge: true });
+
+    localStorage.setItem("current_user", JSON.stringify(currentUser));
+
+    loadProfile();
+    showSection(profileSection);
+}
 
 
 async function loginUser() {
@@ -275,11 +356,11 @@ function loadProfile() {
     if (!currentUser) return;
 
     // Hiển thị thông tin người dùng trên trang profile
-    document.getElementById("profile-username").innerText = currentUser.username;
-    document.getElementById("profile-email").innerText = currentUser.email;
-    document.getElementById("profile-phone").innerText = currentUser.phone;
-    document.getElementById("profile-dob").innerText = currentUser.dob;
-    document.getElementById("profile-last-login").innerText = currentUser.last_login;
+    document.getElementById("profile-username").innerText = currentUser.username || "-";
+    document.getElementById("profile-email").innerText = currentUser.email || "-";
+    document.getElementById("profile-phone").innerText = currentUser.phone || "-";
+    document.getElementById("profile-dob").innerText = currentUser.dob || "-";
+    document.getElementById("profile-last-login").innerText = currentUser.last_login || "-";
 }
 
 // =================== LOGOUT =====================

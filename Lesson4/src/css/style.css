@@ -74,6 +74,19 @@ body{
     opacity:.9;
 }
 
+.google-btn{
+    margin-top:12px;
+    background:#fff;
+    color:#1f2937;
+    border:1px solid #d1d5db;
+}
+
+.google-btn:hover{
+    opacity:1;
+    background:#f9fafb;
+    border-color:#9ca3af;
+}
+
 .danger{
     background:#d32f2f;
 }
